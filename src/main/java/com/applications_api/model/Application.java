@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.*;
+
 import org.hibernate.annotations.GenericGenerator;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -20,29 +22,24 @@ public class Application implements Serializable {
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
-	@Column(name = "id", length = 6, nullable = false)
+	@Column(name = "id", nullable = false)
 	public long id;
 
 	@Column(name = "request")
 	public String request;
 
 	@Column(name = "bid")
-	public float bid;
+	public Double bid;
 
 	@Column(name = "due_date")
 	@JsonIgnoreProperties
 	public String dueDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
 	@Column(name = "status")
-	public Integer status;
+	public String status;
 
-	public Application() {}
-	
-	/*public Application(String request, float bid) {
-		this.request = request;
-		this.bid = bid;
-		this.dueDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-	}*/
+	public Application() {
+	}
 
 	public long getId() {
 		return id;
@@ -52,7 +49,7 @@ public class Application implements Serializable {
 		return request;
 	}
 
-	public float getBid() {
+	public Double getBid() {
 		return bid;
 	}
 
@@ -60,7 +57,7 @@ public class Application implements Serializable {
 		return dueDate;
 	}
 
-	public Integer getStatus() {
+	public String getStatus() {
 		return status;
 	}
 	
@@ -72,7 +69,7 @@ public class Application implements Serializable {
 		this.request = request;
 	}
 
-	public void setBid(float bid) {
+	public void setBid(Double bid) {
 		this.bid = bid;
 	}
 	
@@ -80,7 +77,7 @@ public class Application implements Serializable {
 		this.dueDate = dueDate;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 }

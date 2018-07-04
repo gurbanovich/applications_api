@@ -12,16 +12,16 @@ import com.applications_api.model.Application;
 public interface ApplicationRepository extends JpaRepository<Application, Long> {
 
 	@Modifying
-	@Query("update Application as a set a.status=1 where a.id = :id")
+	@Query("update Application as a set a.status='Executed' where a.id = :id")
 	public void executeApp(@Param("id") Long id);
 
 	@Modifying
-	@Query("update Application as a set a.status=0 where a.id = :id")
+	@Query("update Application as a set a.status='Refused' where a.id = :id")
 	public void refuseApp(@Param("id") Long id);
 
-	@Query("select count(*) from Application as a where a.status = 1")
+	@Query("select count(*) from Application as a where a.status = 'Executed'")
 	public int countExecutedApp();
 
-	@Query("select count(*) from Application as a where a.status = 0")
+	@Query("select count(*) from Application as a where a.status = 'Refused'")
 	public int countRefusedApp();
 }
